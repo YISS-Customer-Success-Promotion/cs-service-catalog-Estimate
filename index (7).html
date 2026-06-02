@@ -1,0 +1,1188 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>カスタマーサクセス推進部 サービスカタログ</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Barlow+Condensed:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0f2744;
+    --blue: #1a5fa8;
+    --accent: #2e8be6;
+    --light: #e8f2fc;
+    --pale: #f4f8fd;
+    --gold: #e8a020;
+    --green: #1a7a4a;
+    --white: #ffffff;
+    --gray: #f0f4f8;
+    --text: #1a2332;
+    --muted: #5a6a7a;
+    --border: #d0dce8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: var(--navy);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  header {
+    background: linear-gradient(135deg, #0a1e38 0%, #0f2744 50%, #162f52 100%);
+    padding: 60px 40px 50px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 300px; height: 300px;
+    border: 1px solid rgba(46,139,230,0.15);
+    border-radius: 50%;
+  }
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: -40px;
+    width: 220px; height: 220px;
+    border: 1px solid rgba(46,139,230,0.1);
+    border-radius: 50%;
+  }
+  .header-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 4px;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  header h1 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(32px, 5vw, 56px);
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: 2px;
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+  header h1 span { color: var(--accent); }
+  .header-sub {
+    font-size: 13px;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 1px;
+  }
+
+  /* MAIN */
+  main {
+    background: var(--pale);
+    min-height: calc(100vh - 200px);
+  }
+
+  /* NAV TABS */
+  .tab-nav {
+    background: var(--white);
+    border-bottom: 2px solid var(--border);
+    display: flex;
+    overflow-x: auto;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  }
+  .tab-btn {
+    flex: 1;
+    min-width: 160px;
+    padding: 18px 20px;
+    border: none;
+    background: transparent;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--muted);
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+    transition: all 0.2s;
+    white-space: nowrap;
+    text-align: center;
+  }
+  .tab-btn:hover { color: var(--blue); background: var(--pale); }
+  .tab-btn.active {
+    color: var(--blue);
+    border-bottom-color: var(--accent);
+    background: var(--pale);
+    font-weight: 700;
+  }
+  .tab-num {
+    display: inline-block;
+    background: var(--navy);
+    color: var(--white);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 7px;
+    border-radius: 3px;
+    margin-right: 6px;
+    letter-spacing: 1px;
+  }
+  .tab-btn.active .tab-num { background: var(--accent); }
+
+  /* PANELS */
+  .panel { display: none; padding: 40px; max-width: 900px; margin: 0 auto; }
+  .panel.active { display: block; }
+
+  /* SERVICE CARD */
+  .service-hero {
+    background: linear-gradient(135deg, var(--navy) 0%, #1a3a6a 100%);
+    border-radius: 12px;
+    padding: 36px 40px;
+    margin-bottom: 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  .service-hero::after {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 180px; height: 180px;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 50%;
+  }
+  .service-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .service-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 14px;
+    line-height: 1.4;
+  }
+  .service-desc {
+    font-size: 13px;
+    line-height: 1.9;
+    color: rgba(255,255,255,0.7);
+    max-width: 580px;
+  }
+
+  /* QUOTE BOXES */
+  .quotes { margin-bottom: 28px; }
+  .quote {
+    background: var(--white);
+    border-left: 4px solid var(--accent);
+    padding: 12px 18px;
+    margin-bottom: 8px;
+    border-radius: 0 6px 6px 0;
+    font-size: 13px;
+    color: var(--muted);
+    font-style: italic;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  }
+
+  /* SECTION LABEL */
+  .sec-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .sec-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* COST SUMMARY */
+  .cost-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+  .cost-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 18px 20px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+  }
+  .cost-card.full { grid-column: 1 / -1; background: var(--light); border-color: var(--accent); }
+  .cost-card-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .cost-card-value {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--navy);
+  }
+  .cost-card.full .cost-card-value { font-size: 28px; color: var(--blue); }
+
+  /* PHASE TABLE */
+  .phase-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 10px;
+    font-size: 13px;
+    background: var(--white);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  }
+  .phase-table th {
+    background: var(--navy);
+    color: var(--white);
+    padding: 12px 14px;
+    text-align: left;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+  .phase-table td {
+    padding: 11px 14px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+  }
+  .phase-table tr:nth-child(even) td { background: var(--gray); }
+  .phase-table tr:last-child td {
+    background: var(--light);
+    font-weight: 700;
+    color: var(--navy);
+    border-bottom: none;
+  }
+  .phase-table tr:last-child td:first-child::before { content: '▶ '; }
+
+  /* NOTE */
+  .note {
+    background: #fffbec;
+    border-left: 4px solid var(--gold);
+    padding: 12px 16px;
+    border-radius: 0 6px 6px 0;
+    font-size: 12px;
+    color: #7a6010;
+    margin-bottom: 28px;
+    line-height: 1.7;
+  }
+
+  /* DELIVERABLES */
+  .deliverable-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 28px;
+  }
+  .deliverable-item {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 12px 16px;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+  .deliverable-item::before {
+    content: '📄';
+    font-size: 15px;
+    flex-shrink: 0;
+  }
+
+  /* VALUE LIST */
+  .value-list { margin-bottom: 28px; }
+  .value-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 13px 16px;
+    border-radius: 6px;
+    margin-bottom: 6px;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--text);
+  }
+  .value-item:nth-child(odd) { background: var(--light); }
+  .value-item:nth-child(even) { background: var(--white); border: 1px solid var(--border); }
+  .check { color: var(--accent); font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+
+  /* PHASE DETAIL */
+  .phase-accordion { margin-bottom: 28px; }
+  .phase-item {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin-bottom: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+  .phase-header {
+    padding: 14px 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--navy);
+    user-select: none;
+    transition: background 0.2s;
+  }
+  .phase-header:hover { background: var(--pale); }
+  .phase-header .ph-icon { font-size: 16px; margin-right: 10px; }
+  .phase-header .ph-arrow { font-size: 12px; color: var(--muted); transition: transform 0.2s; }
+  .phase-item.open .ph-arrow { transform: rotate(180deg); }
+  .phase-body {
+    display: none;
+    padding: 4px 18px 16px 44px;
+    font-size: 13px;
+    line-height: 1.9;
+    color: var(--muted);
+  }
+  .phase-item.open .phase-body { display: block; }
+  .phase-body li { margin-bottom: 4px; list-style: none; padding-left: 12px; position: relative; }
+  .phase-body li::before { content: '・'; position: absolute; left: 0; color: var(--accent); }
+
+  /* ==============================
+     ESTIMATE CALCULATOR
+  ============================== */
+  #panel-estimate .panel-inner { max-width: 720px; margin: 0 auto; }
+
+  .est-hero {
+    background: linear-gradient(135deg, var(--navy) 0%, #1a3a6a 100%);
+    border-radius: 12px;
+    padding: 32px 36px;
+    margin-bottom: 32px;
+    text-align: center;
+  }
+  .est-hero h2 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+  .est-hero p {
+    font-size: 13px;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.8;
+  }
+
+  .est-section {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 28px 32px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+  }
+  .est-section-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* Service checkboxes */
+  .service-checks { display: flex; flex-direction: column; gap: 10px; }
+  .svc-check-label {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 18px;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    user-select: none;
+  }
+  .svc-check-label:hover { border-color: var(--accent); background: var(--pale); }
+  .svc-check-label.checked { border-color: var(--accent); background: var(--light); }
+  .svc-check-label input[type=checkbox] { display: none; }
+  .svc-check-box {
+    width: 22px; height: 22px;
+    border: 2px solid var(--border);
+    border-radius: 4px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    transition: all 0.2s;
+  }
+  .svc-check-label.checked .svc-check-box {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: white;
+  }
+  .svc-check-info { flex: 1; }
+  .svc-check-name { font-size: 14px; font-weight: 500; color: var(--navy); margin-bottom: 2px; }
+  .svc-check-range { font-size: 12px; color: var(--muted); }
+  .svc-check-badge {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    background: var(--navy);
+    color: white;
+    padding: 3px 8px;
+    border-radius: 4px;
+  }
+
+  /* Sliders */
+  .slider-group { margin-bottom: 20px; }
+  .slider-group:last-child { margin-bottom: 0; }
+  .slider-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  .slider-label-text { font-size: 13px; font-weight: 500; color: var(--text); }
+  .slider-value {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--blue);
+    background: var(--light);
+    padding: 3px 12px;
+    border-radius: 20px;
+  }
+  input[type=range] {
+    width: 100%;
+    height: 6px;
+    border-radius: 3px;
+    background: var(--border);
+    outline: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+  }
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 2px 6px rgba(46,139,230,0.4);
+    cursor: pointer;
+    transition: transform 0.15s;
+  }
+  input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.2); }
+  .slider-hints {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 5px;
+  }
+
+  /* Option pills */
+  .pill-group { display: flex; gap: 8px; flex-wrap: wrap; }
+  .pill {
+    padding: 8px 16px;
+    border: 2px solid var(--border);
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.2s;
+    user-select: none;
+  }
+  .pill:hover { border-color: var(--accent); color: var(--blue); }
+  .pill.active { border-color: var(--accent); background: var(--accent); color: white; font-weight: 700; }
+
+  /* RESULT */
+  .est-result {
+    background: linear-gradient(135deg, var(--navy) 0%, #1a3a6a 100%);
+    border-radius: 12px;
+    padding: 32px 36px;
+    margin-top: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .est-result::before {
+    content: '';
+    position: absolute;
+    top: -50px; right: -50px;
+    width: 200px; height: 200px;
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 50%;
+  }
+  .result-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: rgba(255,255,255,0.5);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .result-amount {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(32px, 6vw, 52px);
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .result-amount span { color: var(--accent); }
+  .result-tax { font-size: 12px; color: rgba(255,255,255,0.4); margin-bottom: 24px; }
+  .result-breakdown {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .result-item { }
+  .result-item-label { font-size: 11px; color: rgba(255,255,255,0.4); margin-bottom: 4px; letter-spacing: 1px; }
+  .result-item-value {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.9);
+  }
+  .result-services {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+  .result-services-label { font-size: 11px; color: rgba(255,255,255,0.4); margin-bottom: 10px; letter-spacing: 1px; }
+  .result-svc-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    color: rgba(255,255,255,0.7);
+    padding: 6px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .result-svc-row:last-child { border-bottom: none; }
+  .result-svc-amount {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--accent);
+  }
+  .result-empty {
+    text-align: center;
+    padding: 20px;
+    color: rgba(255,255,255,0.4);
+    font-size: 13px;
+  }
+
+  /* DISCLAIMER */
+  .disclaimer {
+    background: var(--gray);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 18px;
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.8;
+    margin-top: 16px;
+  }
+
+  /* OVERVIEW TAB */
+  .overview-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .overview-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px 20px;
+    text-align: center;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .overview-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--accent);
+  }
+  .overview-card:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,0.1); }
+  .ov-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .ov-name { font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 10px; line-height: 1.4; }
+  .ov-period { font-size: 12px; color: var(--muted); margin-bottom: 6px; }
+  .ov-price {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--blue);
+  }
+  .flow-box {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 28px 32px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+  }
+  .flow-title { font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 20px; }
+  .flow-steps { display: flex; align-items: stretch; gap: 0; }
+  .flow-step {
+    flex: 1;
+    text-align: center;
+    padding: 16px 12px;
+    background: var(--pale);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    position: relative;
+  }
+  .flow-step:not(:last-child)::after {
+    content: '→';
+    position: absolute;
+    right: -14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: var(--accent);
+    z-index: 1;
+  }
+  .flow-step:not(:last-child) { margin-right: 20px; }
+  .flow-step-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+  .flow-step-name { font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+  .flow-step-desc { font-size: 11px; color: var(--muted); line-height: 1.5; }
+
+  footer {
+    background: var(--navy);
+    color: rgba(255,255,255,0.4);
+    text-align: center;
+    padding: 24px;
+    font-size: 12px;
+    letter-spacing: 1px;
+  }
+
+  @media (max-width: 640px) {
+    header { padding: 40px 20px 36px; }
+    .panel { padding: 24px 16px; }
+    .overview-grid { grid-template-columns: 1fr; }
+    .cost-grid { grid-template-columns: 1fr; }
+    .deliverable-grid { grid-template-columns: 1fr; }
+    .result-breakdown { grid-template-columns: 1fr; gap: 10px; }
+    .flow-steps { flex-direction: column; gap: 12px; }
+    .flow-step:not(:last-child)::after { content: '↓'; right: auto; left: 50%; top: auto; bottom: -18px; transform: translateX(-50%); }
+    .flow-step:not(:last-child) { margin-right: 0; margin-bottom: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-label">Yanmar Information System Service</div>
+  <h1>カスタマーサクセス推進部<br><span>サービスカタログ</span></h1>
+  <p class="header-sub">事業価値の最大化を、ともに。</p>
+</header>
+
+<main>
+  <nav class="tab-nav">
+    <button class="tab-btn active" onclick="switchTab('overview')">📋 サービス一覧</button>
+    <button class="tab-btn" onclick="switchTab('svc01')"><span class="tab-num">01</span>IT投資判断支援</button>
+    <button class="tab-btn" onclick="switchTab('svc02')"><span class="tab-num">02</span>RFI作成・情報収集支援</button>
+    <button class="tab-btn" onclick="switchTab('svc03')"><span class="tab-num">03</span>IT構想策定・選定支援</button>
+    <button class="tab-btn" onclick="switchTab('estimate')">🧮 簡単見積もり</button>
+  </nav>
+
+  <!-- OVERVIEW -->
+  <div id="panel-overview" class="panel active">
+    <div class="overview-grid">
+      <div class="overview-card" onclick="switchTab('svc01')">
+        <div class="ov-num">SERVICE 01</div>
+        <div class="ov-name">IT投資判断支援サービス</div>
+        <div class="ov-period">⏱ 1.5〜5ヶ月</div>
+        <div class="ov-price">360万〜1,200万円</div>
+      </div>
+      <div class="overview-card" onclick="switchTab('svc02')">
+        <div class="ov-num">SERVICE 02</div>
+        <div class="ov-name">RFI作成・ベンダー情報収集支援サービス</div>
+        <div class="ov-period">⏱ 1〜2ヶ月</div>
+        <div class="ov-price">240万〜480万円</div>
+      </div>
+      <div class="overview-card" onclick="switchTab('svc03')">
+        <div class="ov-num">SERVICE 03</div>
+        <div class="ov-name">IT構想策定・ソリューション選定支援サービス</div>
+        <div class="ov-period">⏱ 3〜6ヶ月</div>
+        <div class="ov-price">720万〜2,160万円</div>
+      </div>
+    </div>
+    <div class="flow-box">
+      <div class="flow-title">📍 導入検討プロセスと対応サービス</div>
+      <div class="flow-steps">
+        <div class="flow-step">
+          <div class="flow-step-num">SERVICE 01</div>
+          <div class="flow-step-name">IT投資判断</div>
+          <div class="flow-step-desc">やるべきか？<br>何に投資すべきか？</div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-step-num">SERVICE 02</div>
+          <div class="flow-step-name">RFI・情報収集</div>
+          <div class="flow-step-desc">どんなベンダーが<br>いるか把握する</div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-step-num">SERVICE 03</div>
+          <div class="flow-step-name">構想策定・選定</div>
+          <div class="flow-step-desc">どうやるか？<br>誰とやるか？</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SERVICE 01 -->
+  <div id="panel-svc01" class="panel">
+    <div class="service-hero">
+      <div class="service-num">SERVICE 01</div>
+      <div class="service-title">IT投資判断支援サービス</div>
+      <div class="service-desc">IT投資に対する費用対効果、リスク、実現性を整理し、経営層や事業部門が納得できる投資判断材料を提供します。複数の選択肢を比較評価し、最適な意思決定を支援します。</div>
+    </div>
+    <div class="quotes">
+      <div class="quote">💬「システム刷新は必要だが、本当に投資すべきか判断できない」</div>
+      <div class="quote">💬「ERPとモダナイゼーション、どちらが自社に最適か判断できない」</div>
+      <div class="quote">💬「経営層へ説明できる資料が作れない」</div>
+    </div>
+    <div class="sec-label">概算費用</div>
+    <div class="cost-grid">
+      <div class="cost-card"><div class="cost-card-label">期間目安</div><div class="cost-card-value">1.5〜5ヶ月</div></div>
+      <div class="cost-card"><div class="cost-card-label">体制</div><div class="cost-card-value">PM1名＋メンバー1名</div></div>
+      <div class="cost-card"><div class="cost-card-label">概算工数</div><div class="cost-card-value">3〜10人月</div></div>
+      <div class="cost-card full"><div class="cost-card-label">概算金額（税抜）</div><div class="cost-card-value">360万円〜1,200万円</div></div>
+    </div>
+    <table class="phase-table">
+      <tr><th>フェーズ</th><th>期間目安</th><th>工数目安</th><th>概算金額</th></tr>
+      <tr><td>現状分析</td><td>0.5〜2ヶ月</td><td>1〜4人月</td><td>120万〜480万円</td></tr>
+      <tr><td>投資効果整理</td><td>0.25〜0.5ヶ月</td><td>0.5〜1人月</td><td>60万〜120万円</td></tr>
+      <tr><td>選択肢比較評価</td><td>0.25〜0.5ヶ月</td><td>0.5〜1人月</td><td>60万〜120万円</td></tr>
+      <tr><td>投資判断資料作成</td><td>0.25〜1.5ヶ月</td><td>0.5〜3人月</td><td>60万〜360万円</td></tr>
+      <tr><td>合計</td><td>1.5〜5ヶ月</td><td>3〜10人月</td><td>360万〜1,200万円</td></tr>
+    </table>
+    <div class="note" style="margin-bottom:28px">⚠️ 現状分析の工数は対象領域（生産・販売・会計・物流など）の範囲によって大きく変動します。複数領域をまたぐ場合は現状分析だけで2ヶ月以上かかるケースもあります。</div>
+    <div class="sec-label">提供内容</div>
+    <div class="phase-accordion">
+      <div class="phase-item">
+        <div class="phase-header" onclick="togglePhase(this)"><span><span class="ph-icon">🔍</span>現状分析</span><span class="ph-arrow">▼</span></div>
+        <div class="phase-body"><ul><li>現行システム分析</li><li>業務課題分析</li><li>運用コスト分析</li><li>リスク分析</li></ul></div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-header" onclick="togglePhase(this)"><span><span class="ph-icon">💹</span>投資効果整理</span><span class="ph-arrow">▼</span></div>
+        <div class="phase-body"><ul><li>定量効果整理</li><li>定性効果整理</li><li>ROI試算</li><li>投資回収期間試算</li></ul></div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-header" onclick="togglePhase(this)"><span><span class="ph-icon">⚖️</span>選択肢比較評価</span><span class="ph-arrow">▼</span></div>
+        <div class="phase-body"><ul><li>現状維持</li><li>モダナイゼーション</li><li>ERP導入</li><li>クラウド移行　など複数案を比較評価</li></ul></div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-header" onclick="togglePhase(this)"><span><span class="ph-icon">📊</span>投資判断資料作成</span><span class="ph-arrow">▼</span></div>
+        <div class="phase-body"><ul><li>経営層向け報告資料作成</li><li>投資優先順位整理</li><li>推奨案策定</li><li>意思決定支援</li></ul></div>
+      </div>
+    </div>
+    <div class="sec-label">成果物</div>
+    <div class="deliverable-grid">
+      <div class="deliverable-item">IT投資判断書</div>
+      <div class="deliverable-item">投資効果分析資料</div>
+      <div class="deliverable-item">ROI試算資料</div>
+      <div class="deliverable-item">選択肢比較評価資料</div>
+      <div class="deliverable-item">経営層向け説明資料</div>
+    </div>
+    <div class="sec-label">提供価値</div>
+    <div class="value-list">
+      <div class="value-item"><span class="check">✓</span>IT投資の妥当性を可視化し、根拠ある意思決定を実現</div>
+      <div class="value-item"><span class="check">✓</span>経営層の意思決定を迅速・的確に支援</div>
+      <div class="value-item"><span class="check">✓</span>投資リスクを事前に把握し、未然に低減</div>
+      <div class="value-item"><span class="check">✓</span>限られた予算の最適配分を実現し、投資効率を向上</div>
+      <div class="value-item"><span class="check">✓</span>IT投資の成果最大化に一貫して貢献</div>
+    </div>
+  </div>
+
+  <!-- SERVICE 02 -->
+  <div id="panel-svc02" class="panel">
+    <div class="service-hero">
+      <div class="service-num">SERVICE 02</div>
+      <div class="service-title">RFI作成・ベンダー情報収集支援サービス</div>
+      <div class="service-desc">システム導入を本格検討する前段階として、候補ベンダーの技術力・実績・概算費用を把握するためのRFI（情報提供依頼）作成から、回答内容の整理・比較までを支援します。</div>
+    </div>
+    <div class="quotes">
+      <div class="quote">💬「どんなベンダーがいるのか、まず情報を集めたい」</div>
+      <div class="quote">💬「RFPを出す前に市場感・相場感を把握したい」</div>
+      <div class="quote">💬「ベンダーへの問い合わせ方がわからない」</div>
+    </div>
+    <div class="sec-label">概算費用</div>
+    <div class="cost-grid">
+      <div class="cost-card"><div class="cost-card-label">期間目安</div><div class="cost-card-value">1〜2ヶ月</div></div>
+      <div class="cost-card"><div class="cost-card-label">体制</div><div class="cost-card-value">PM1名＋メンバー1名</div></div>
+      <div class="cost-card"><div class="cost-card-label">概算工数</div><div class="cost-card-value">2〜4人月</div></div>
+      <div class="cost-card full"><div class="cost-card-label">概算金額（税抜）</div><div class="cost-card-value">240万円〜480万円</div></div>
+    </div>
+    <table class="phase-table">
+      <tr><th>フェーズ</th><th>期間目安</th><th>工数目安</th><th>概算金額</th></tr>
+      <tr><td>RFI文書作成（質問項目整理）</td><td>0.25〜0.5ヶ月</td><td>0.5〜1人月</td><td>60万〜120万円</td></tr>
+      <tr><td>問い合わせ先ベンダー選定</td><td>0.25〜0.5ヶ月</td><td>0.5〜1人月</td><td>60万〜120万円</td></tr>
+      <tr><td>ベンダーヒアリング調整・実施支援</td><td>0.25〜0.5ヶ月</td><td>0.5〜1人月</td><td>60万〜120万円</td></tr>
+      <tr><td>回答内容の整理・比較・サマリー作成</td><td>0.25〜0.5ヶ月</td><td>0.5〜1人月</td><td>60万〜120万円</td></tr>
+      <tr><td>合計</td><td>1〜2ヶ月</td><td>2〜4人月</td><td>240万〜480万円</td></tr>
+    </table>
+    <div class="note" style="margin-bottom:28px">⚠️ 問い合わせ先ベンダー数・ヒアリング回数により変動します。</div>
+    <div class="sec-label">提供内容</div>
+    <div class="phase-accordion">
+      <div class="phase-item">
+        <div class="phase-header" onclick="togglePhase(this)"><span><span class="ph-icon">📝</span>RFI文書作成</span><span class="ph-arrow">▼</span></div>
+        <div class="phase-body"><ul><li>質問項目の整理・構造化</li><li>自社要件・課題の記載</li><li>回答フォーマットの設計</li></ul></div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-header" onclick="togglePhase(this)"><span><span class="ph-icon">🔎</span>問い合わせ先ベンダー選定</span><span class="ph-arrow">▼</span></div>
+        <div class="phase-body"><ul><li>候補ベンダーのリストアップ</li><li>選定基準の整理</li><li>問い合わせ先の絞り込み</li></ul></div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-header" onclick="togglePhase(this)"><span><span class="ph-icon">🤝</span>ベンダーヒアリング調整・実施支援</span><span class="ph-arrow">▼</span></div>
+        <div class="phase-body"><ul><li>ヒアリングのスケジュール調整</li><li>質問事項の整理</li><li>ヒアリング当日の進行支援</li></ul></div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-header" onclick="togglePhase(this)"><span><span class="ph-icon">📊</span>回答内容の整理・比較</span><span class="ph-arrow">▼</span></div>
+        <div class="phase-body"><ul><li>ベンダー回答の整理</li><li>比較表の作成</li><li>RFI結果サマリー作成</li></ul></div>
+      </div>
+    </div>
+    <div class="sec-label">成果物</div>
+    <div class="deliverable-grid">
+      <div class="deliverable-item">RFI文書</div>
+      <div class="deliverable-item">候補ベンダーリスト</div>
+      <div class="deliverable-item">ベンダー回答比較表</div>
+      <div class="deliverable-item">RFI結果サマリー</div>
+    </div>
+    <div class="sec-label">提供価値</div>
+    <div class="value-list">
+      <div class="value-item"><span class="check">✓</span>市場・ベンダーの実態を把握した上で投資判断・RFP作成に進める</div>
+      <div class="value-item"><span class="check">✓</span>適切なベンダー候補を早期に絞り込み、選定精度を向上</div>
+      <div class="value-item"><span class="check">✓</span>ヒアリングの質を高め、必要な情報を確実に収集</div>
+      <div class="value-item"><span class="check">✓</span>RFP・ベンダー選定フェーズの手戻りを防止</div>
+    </div>
+  </div>
+
+  <!-- SERVICE 03 -->
+  <div id="panel-svc03" class="panel">
+    <div class="service-hero">
+      <div class="service-num">SERVICE 03</div>
+      <div class="service-title">IT構想策定・ソリューション選定支援サービス</div>
+      <div class="service-desc">老朽化したシステムの刷新や業務システム導入を検討しているお客様に対し、業務課題の整理から要件整理、RFP作成、ベンダー選定までを一貫して支援します。</div>
+    </div>
+    <div class="quotes">
+      <div class="quote">💬「システムを新しくしたいが、何から始めればよいかわからない」</div>
+      <div class="quote">💬「ERPやパッケージを導入したいが、自社に最適な製品がわからない」</div>
+    </div>
+    <div class="sec-label">概算費用</div>
+    <div class="cost-grid">
+      <div class="cost-card"><div class="cost-card-label">期間目安</div><div class="cost-card-value">3〜6ヶ月</div></div>
+      <div class="cost-card"><div class="cost-card-label">体制</div><div class="cost-card-value">PM1名＋メンバー1〜2名</div></div>
+      <div class="cost-card"><div class="cost-card-label">概算工数</div><div class="cost-card-value">6〜18人月</div></div>
+      <div class="cost-card full"><div class="cost-card-label">概算金額（税抜）</div><div class="cost-card-value">720万円〜2,160万円</div></div>
+    </div>
+    <table class="phase-table">
+      <tr><th>フェーズ</th><th>期間目安</th><th>工数目安</th><th>概算金額</th></tr>
+      <tr><td>現状課題の整理</td><td>0.5〜1ヶ月</td><td>1〜3人月</td><td>120万〜360万円</td></tr>
+      <tr><td>要件整理</td><td>0.5〜1ヶ月</td><td>1〜3人月</td><td>120万〜360万円</td></tr>
+      <tr><td>ソリューション選定支援</td><td>0.5〜1ヶ月</td><td>1〜3人月</td><td>120万〜360万円</td></tr>
+      <tr><td>RFP作成・ベンダー選定支援</td><td>1〜2ヶ月</td><td>2〜6人月</td><td>240万〜720万円</td></tr>
+      <tr><td>導入準備支援</td><td>0.5〜1ヶ月</td><td>1〜3人月</td><td>120万〜360万円</td></tr>
+      <tr><td>合計</td><td>3〜6ヶ月</td><td>6〜18人月</td><td>720万〜2,160万円</td></tr>
+    </table>
+    <div class="note" style="margin-bottom:28px">⚠️ フルスコープの目安です。部分的なご依頼（RFP作成のみ等）にも対応します。</div>
+    <div class="sec-label">提供内容</div>
+    <div class="phase-accordion">
+      <div class="phase-item">
+        <div class="phase-header" onclick="togglePhase(this)"><span><span class="ph-icon">🔍</span>現状課題の整理</span><span class="ph-arrow">▼</span></div>
+        <div class="phase-body"><ul><li>業務課題のヒアリング</li><li>システム課題の整理</li><li>現状業務の可視化</li><li>将来像（To-Be）の整理</li></ul></div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-header" onclick="togglePhase(this)"><span><span class="ph-icon">📝</span>要件整理</span><span class="ph-arrow">▼</span></div>
+        <div class="phase-body"><ul><li>業務要件の整理</li><li>システム要件の整理</li><li>Must／Should／Want 要件の分類</li><li>要件一覧の作成</li></ul></div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-header" onclick="togglePhase(this)"><span><span class="ph-icon">🔎</span>ソリューション選定支援</span><span class="ph-arrow">▼</span></div>
+        <div class="phase-body"><ul><li>パッケージ製品調査</li><li>ソリューション比較評価</li><li>製品選定支援</li><li>導入方式の検討</li></ul></div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-header" onclick="togglePhase(this)"><span><span class="ph-icon">📄</span>RFP作成・ベンダー選定支援</span><span class="ph-arrow">▼</span></div>
+        <div class="phase-body"><ul><li>RFP作成</li><li>提案依頼先選定</li><li>提案内容評価</li><li>ベンダー比較評価・選定支援</li></ul></div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-header" onclick="togglePhase(this)"><span><span class="ph-icon">🚀</span>導入準備支援</span><span class="ph-arrow">▼</span></div>
+        <div class="phase-body"><ul><li>インターフェイス要件整理</li><li>データ移行方針整理</li><li>導入計画策定支援</li></ul></div>
+      </div>
+    </div>
+    <div class="sec-label">成果物</div>
+    <div class="deliverable-grid">
+      <div class="deliverable-item">課題整理資料</div>
+      <div class="deliverable-item">要件定義書（簡易版）</div>
+      <div class="deliverable-item">ソリューション比較評価資料</div>
+      <div class="deliverable-item">RFP（提案依頼書）</div>
+      <div class="deliverable-item">ベンダー評価表</div>
+      <div class="deliverable-item">導入計画書</div>
+    </div>
+    <div class="sec-label">提供価値</div>
+    <div class="value-list">
+      <div class="value-item"><span class="check">✓</span>システム刷新の方向性を明確化し、迷わずに前進できる</div>
+      <div class="value-item"><span class="check">✓</span>要件の漏れや認識齟齬を防止し、手戻りリスクを低減</div>
+      <div class="value-item"><span class="check">✓</span>最適なソリューション選定を実現し、投資効果を最大化</div>
+      <div class="value-item"><span class="check">✓</span>ベンダー選定の透明性向上により、公正な比較評価が可能</div>
+      <div class="value-item"><span class="check">✓</span>プロジェクト成功確率の向上をバックアップ</div>
+    </div>
+  </div>
+
+  <!-- ESTIMATE -->
+  <div id="panel-estimate" class="panel">
+    <div class="est-hero">
+      <h2>🧮 簡単見積もり</h2>
+      <p>サービスと条件を選択すると概算金額の目安が表示されます。<br>あくまで参考値です。詳細はお問い合わせください。</p>
+    </div>
+
+    <div class="est-section">
+      <div class="est-section-title">📋 ご検討のサービスを選んでください（複数選択可）</div>
+      <div class="service-checks">
+        <label class="svc-check-label" id="lbl-s01">
+          <input type="checkbox" id="chk-s01" onchange="calcEstimate()">
+          <div class="svc-check-box" id="box-s01"></div>
+          <div class="svc-check-info">
+            <div class="svc-check-name">IT投資判断支援サービス</div>
+            <div class="svc-check-range">基本：360万〜1,200万円</div>
+          </div>
+          <span class="svc-check-badge">01</span>
+        </label>
+        <label class="svc-check-label" id="lbl-s02">
+          <input type="checkbox" id="chk-s02" onchange="calcEstimate()">
+          <div class="svc-check-box" id="box-s02"></div>
+          <div class="svc-check-info">
+            <div class="svc-check-name">RFI作成・ベンダー情報収集支援サービス</div>
+            <div class="svc-check-range">基本：240万〜480万円</div>
+          </div>
+          <span class="svc-check-badge">02</span>
+        </label>
+        <label class="svc-check-label" id="lbl-s03">
+          <input type="checkbox" id="chk-s03" onchange="calcEstimate()">
+          <div class="svc-check-box" id="box-s03"></div>
+          <div class="svc-check-info">
+            <div class="svc-check-name">IT構想策定・ソリューション選定支援サービス</div>
+            <div class="svc-check-range">基本：720万〜2,160万円</div>
+          </div>
+          <span class="svc-check-badge">03</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="est-section">
+      <div class="est-section-title">🏢 対象領域の範囲</div>
+      <div class="slider-group">
+        <div class="slider-label">
+          <span class="slider-label-text">対象業務領域の数</span>
+          <span class="slider-value" id="domain-val">2領域</span>
+        </div>
+        <input type="range" id="domain-slider" min="1" max="5" value="2" oninput="updateDomain(this.value); calcEstimate()">
+        <div class="slider-hints"><span>1領域（例：会計のみ）</span><span>5領域以上（生産・販売・会計・物流・購買など）</span></div>
+      </div>
+    </div>
+
+    <div class="est-section">
+      <div class="est-section-title">⚖️ スコープの大きさ</div>
+      <div class="pill-group" id="scope-pills">
+        <div class="pill active" onclick="selectScope('slim', this)">スリム<br><small>一部フェーズのみ</small></div>
+        <div class="pill" onclick="selectScope('standard', this)">標準<br><small>フルスコープ</small></div>
+        <div class="pill" onclick="selectScope('large', this)">大規模<br><small>複雑・広範囲</small></div>
+      </div>
+    </div>
+
+    <div class="est-result" id="est-result">
+      <div class="result-empty">↑ サービスを1つ以上選択してください</div>
+    </div>
+
+    <div class="disclaimer">
+      ※ 上記はあくまでも参考目安です。単価：120万円／人月を前提に算出しています。<br>
+      ※ 実際の費用は対象範囲・難易度・体制・期間により大きく変動します。<br>
+      ※ 正式なお見積もりはカスタマーサクセス推進部までお問い合わせください。
+    </div>
+  </div>
+</main>
+
+<footer>
+  © Yanmar Information System Service Co., Ltd. — カスタマーサクセス推進部
+</footer>
+
+<script>
+  // ── TAB SWITCH ──────────────────────────────────────────
+  function switchTab(id) {
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('panel-' + id).classList.add('active');
+    const btns = document.querySelectorAll('.tab-btn');
+    const map = { overview: 0, svc01: 1, svc02: 2, svc03: 3, estimate: 4 };
+    btns[map[id]].classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // ── ACCORDION ───────────────────────────────────────────
+  function togglePhase(header) {
+    const item = header.parentElement;
+    item.classList.toggle('open');
+  }
+
+  // ── CHECKBOX STYLE ──────────────────────────────────────
+  ['s01','s02','s03'].forEach(id => {
+    const chk = document.getElementById('chk-' + id);
+    const lbl = document.getElementById('lbl-' + id);
+    const box = document.getElementById('box-' + id);
+    chk.addEventListener('change', () => {
+      if (chk.checked) {
+        lbl.classList.add('checked');
+        box.innerHTML = '✓';
+      } else {
+        lbl.classList.remove('checked');
+        box.innerHTML = '';
+      }
+    });
+  });
+
+  // ── DOMAIN SLIDER ───────────────────────────────────────
+  function updateDomain(v) {
+    const labels = ['','1領域','2領域','3領域','4領域','5領域以上'];
+    document.getElementById('domain-val').textContent = labels[v];
+  }
+
+  // ── SCOPE PILLS ─────────────────────────────────────────
+  let currentScope = 'slim';
+  function selectScope(scope, el) {
+    currentScope = scope;
+    document.querySelectorAll('#scope-pills .pill').forEach(p => p.classList.remove('active'));
+    el.classList.add('active');
+    calcEstimate();
+  }
+
+  // ── ESTIMATE CALC ───────────────────────────────────────
+  // Base: [min人月, max人月]
+  const BASE = {
+    s01: [3, 10],
+    s02: [2, 4],
+    s03: [6, 18],
+  };
+  const NAMES = {
+    s01: 'IT投資判断支援サービス',
+    s02: 'RFI作成・ベンダー情報収集支援',
+    s03: 'IT構想策定・ソリューション選定支援',
+  };
+  const PERIODS = {
+    s01: ['1.5〜5ヶ月', '1.5〜5ヶ月', '2〜5ヶ月'],
+    s02: ['1〜1.5ヶ月', '1〜2ヶ月', '1.5〜2ヶ月'],
+    s03: ['3〜5ヶ月', '3〜6ヶ月', '4〜8ヶ月'],
+  };
+
+  function calcEstimate() {
+    const checked = ['s01','s02','s03'].filter(id => document.getElementById('chk-' + id).checked);
+    const result = document.getElementById('est-result');
+
+    if (checked.length === 0) {
+      result.innerHTML = '<div class="result-empty">↑ サービスを1つ以上選択してください</div>';
+      return;
+    }
+
+    const domain = parseInt(document.getElementById('domain-slider').value);
+    // domain multiplier: 1→0.8, 2→1.0, 3→1.3, 4→1.6, 5→2.0
+    const domainMult = [0.8, 1.0, 1.3, 1.6, 2.0][domain - 1];
+    // scope multiplier
+    const scopeMult = { slim: 0.6, standard: 1.0, large: 1.4 }[currentScope];
+
+    const UNIT = 120; // 万円/人月
+
+    let totalMin = 0, totalMax = 0;
+    let rows = '';
+    let totalMM_min = 0, totalMM_max = 0;
+
+    checked.forEach(id => {
+      const [bMin, bMax] = BASE[id];
+      // domain mult only applies to s01 (現状分析 heavy)
+      const dm = (id === 's01') ? domainMult : (id === 's03' ? Math.sqrt(domainMult) : 1.0);
+      const min = Math.round(bMin * dm * scopeMult);
+      const max = Math.round(bMax * dm * scopeMult);
+      const costMin = min * UNIT;
+      const costMax = max * UNIT;
+      totalMin += costMin;
+      totalMax += costMax;
+      totalMM_min += min;
+      totalMM_max += max;
+
+      const pi = { slim: 0, standard: 1, large: 2 }[currentScope];
+      const period = PERIODS[id][pi];
+
+      rows += `<div class="result-svc-row">
+        <span>${NAMES[id]}</span>
+        <span class="result-svc-amount">${costMin.toLocaleString()}万〜${costMax.toLocaleString()}万円</span>
+      </div>`;
+    });
+
+    result.innerHTML = `
+      <div class="result-label">概算金額（税抜）</div>
+      <div class="result-amount"><span>${totalMin.toLocaleString()}万</span>〜<span>${totalMax.toLocaleString()}万</span>円</div>
+      <div class="result-tax">※ 税抜 / 単価120万円／人月前提</div>
+      <div class="result-breakdown">
+        <div class="result-item">
+          <div class="result-item-label">概算工数</div>
+          <div class="result-item-value">${totalMM_min}〜${totalMM_max}人月</div>
+        </div>
+        <div class="result-item">
+          <div class="result-item-label">対象領域</div>
+          <div class="result-item-value">${['','1領域','2領域','3領域','4領域','5領域以上'][domain]}</div>
+        </div>
+        <div class="result-item">
+          <div class="result-item-label">スコープ</div>
+          <div class="result-item-value">${{slim:'スリム',standard:'標準',large:'大規模'}[currentScope]}</div>
+        </div>
+      </div>
+      <div class="result-services">
+        <div class="result-services-label">サービス別内訳</div>
+        ${rows}
+      </div>
+    `;
+  }
+</script>
+</body>
+</html>
