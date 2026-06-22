@@ -367,9 +367,234 @@
   .phase-body li { margin-bottom: 4px; list-style: none; padding-left: 12px; position: relative; }
   .phase-body li::before { content: '・'; position: absolute; left: 0; color: var(--accent); }
 
-  /* ==============================
-     ESTIMATE CALCULATOR
-  ============================== */
+  .roadmap-gen-btn {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--blue) 100%);
+    color: white;
+    border: none;
+    padding: 14px 36px;
+    border-radius: 8px;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 14px rgba(46,139,230,0.35);
+    transition: all 0.2s;
+  }
+  .roadmap-gen-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(46,139,230,0.45); }
+
+  .roadmap-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+  .roadmap-title-icon { font-size: 28px; }
+  .roadmap-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 2px;
+  }
+  .roadmap-subtitle { font-size: 12px; color: var(--muted); }
+
+  /* Gantt Chart — flex方式 */
+  .gantt-wrap { overflow-x: auto; margin-bottom: 24px; }
+  .gantt-container { min-width: 600px; }
+
+  .gantt-header-row,
+  .gantt-row {
+    display: flex;
+    align-items: stretch;
+    border-bottom: 1px solid var(--border);
+  }
+  .gantt-row:nth-child(even) .gantt-track { background: var(--gray); }
+  .gantt-row:nth-child(odd)  .gantt-track { background: var(--white); }
+
+  .gantt-label-hdr {
+    width: 220px; flex-shrink: 0;
+    background: var(--navy);
+    border-right: 2px solid rgba(255,255,255,0.15);
+  }
+  .gantt-label {
+    width: 220px; flex-shrink: 0;
+    padding: 10px 14px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text);
+    background: var(--white);
+    border-right: 2px solid var(--border);
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  .gantt-row:nth-child(even) .gantt-label { background: var(--gray); }
+
+  .gantt-label .phase-svc-tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    background: var(--navy);
+    color: white;
+    padding: 1px 6px;
+    border-radius: 3px;
+    margin-right: 6px;
+    letter-spacing: 0.5px;
+    flex-shrink: 0;
+  }
+
+  .gantt-track-hdr {
+    flex: 1;
+    display: flex;
+    background: var(--navy);
+  }
+  .gantt-hdr-cell {
+    flex: 1;
+    text-align: center;
+    font-size: 11px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.7);
+    padding: 8px 4px;
+    border-right: 1px solid rgba(255,255,255,0.1);
+    letter-spacing: 0.3px;
+  }
+  .gantt-hdr-cell:last-child { border-right: none; }
+
+  .gantt-track {
+    flex: 1;
+    height: 40px;
+    position: relative;
+    background: var(--white);
+  }
+  .gantt-track::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(
+      to right,
+      transparent,
+      transparent calc(100% / var(--cols) - 0.5px),
+      var(--border) calc(100% / var(--cols) - 0.5px),
+      var(--border) calc(100% / var(--cols))
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* 実線バー（最小期間） */
+  .gantt-bar-solid {
+    position: absolute;
+    top: 9px;
+    height: 22px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    padding-left: 6px;
+    font-size: 10px;
+    font-weight: 700;
+    color: white;
+    white-space: nowrap;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.18);
+    z-index: 1;
+    cursor: default;
+    transition: opacity 0.2s;
+  }
+  .gantt-bar-solid:hover { opacity: 0.85; }
+
+  /* 点線バー（延長リスク帯） */
+  .gantt-bar-dashed {
+    position: absolute;
+    top: 9px;
+    height: 22px;
+    border-radius: 0 4px 4px 0;
+    border-top: 2px dashed;
+    border-bottom: 2px dashed;
+    border-right: 2px dashed;
+    box-sizing: border-box;
+    z-index: 1;
+    cursor: default;
+    transition: opacity 0.2s;
+  }
+  .gantt-bar-dashed:hover { opacity: 0.7; }
+
+  /* サービス別カラー */
+  .bar-s01 { background: #1a5fa8; }
+  .bar-s01-dashed { border-color: #2e8be6; background: rgba(46,139,230,0.1); }
+  .bar-s02 { background: #1a7a4a; }
+  .bar-s02-dashed { border-color: #2ab56a; background: rgba(42,181,106,0.1); }
+  .bar-s03 { background: #8b3a8b; }
+  .bar-s03-dashed { border-color: #c45cc4; background: rgba(196,92,196,0.1); }
+
+  .gantt-legend {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+    align-items: center;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .legend-dot {
+    width: 12px; height: 12px;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+  .legend-dashed-line {
+    width: 22px; height: 12px;
+    border-top: 2px dashed var(--muted);
+    border-bottom: 2px dashed var(--muted);
+    border-right: 2px dashed var(--muted);
+    border-radius: 0 2px 2px 0;
+    flex-shrink: 0;
+  }
+
+  /* Phase cards */
+  .roadmap-phases { display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; }
+  .roadmap-phase-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+    padding: 14px 18px;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+  }
+  .roadmap-phase-card.svc-s02 { border-left-color: #2ab56a; }
+  .roadmap-phase-card.svc-s03 { border-left-color: #c45cc4; }
+  .rpc-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--accent);
+    min-width: 36px;
+    line-height: 1;
+  }
+  .roadmap-phase-card.svc-s02 .rpc-num { color: #2ab56a; }
+  .roadmap-phase-card.svc-s03 .rpc-num { color: #c45cc4; }
+  .rpc-body { flex: 1; }
+  .rpc-title { font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 3px; }
+  .rpc-period { font-size: 12px; color: var(--muted); margin-bottom: 4px; }
+  .rpc-tasks { font-size: 12px; color: var(--muted); line-height: 1.8; }
+
+  .roadmap-note {
+    font-size: 12px;
+    color: var(--muted);
+    background: var(--gray);
+    border-radius: 6px;
+    padding: 12px 16px;
+    line-height: 1.8;
+    margin-top: 20px;
+  }
+
   #panel-estimate .panel-inner { max-width: 720px; margin: 0 auto; }
 
   .est-hero {
@@ -1037,6 +1262,25 @@
       <div class="result-empty">↑ サービスを1つ以上選択してください</div>
     </div>
 
+    <div id="roadmap-btn-area" style="display:none; text-align:center; margin-top:20px;">
+      <button class="roadmap-gen-btn" onclick="generateRoadmap()">📅 ロードマップを生成する</button>
+    </div>
+
+    <div id="roadmap-area" style="display:none; margin-top:28px;">
+      <div class="roadmap-header">
+        <span class="roadmap-title-icon">🗓️</span>
+        <div>
+          <div class="roadmap-title">プロジェクトロードマップ（目安）</div>
+          <div class="roadmap-subtitle" id="roadmap-subtitle"></div>
+        </div>
+      </div>
+      <div id="roadmap-content"></div>
+      <div class="roadmap-note">
+        ※ 上記は選択条件に基づく標準的な進め方の目安です。実際のスケジュールはプロジェクト開始後に詳細化します。<br>
+        ※ 複数サービスを同時並行で進める場合、期間が重複することがあります。
+      </div>
+    </div>
+
     <div class="disclaimer">
       ※ 上記はあくまでも参考目安です。単価：120万円／人月を前提に算出しています。<br>
       ※ 実際の費用は対象範囲・難易度・体制・期間により大きく変動します。<br>
@@ -1182,7 +1426,139 @@
         ${rows}
       </div>
     `;
+
+    // ロードマップボタン表示
+    document.getElementById('roadmap-btn-area').style.display = 'block';
+    document.getElementById('roadmap-area').style.display = 'none';
+  }
+  // ── ROADMAP GENERATOR ────────────────────────────────────
+  function generateRoadmap() {
+    const checked = ['s01','s02','s03'].filter(id => document.getElementById('chk-' + id).checked);
+    const domain = parseInt(document.getElementById('domain-slider').value);
+    const domainLabel = ['','1領域','2領域','3領域','4領域','5領域以上'][domain];
+    const scopeLabel = {slim:'スリム',standard:'標準',large:'大規模'}[currentScope];
+
+    // フェーズ定義: [サービスID, フェーズ名, タスク[], 期間(slim/standard/large)]
+    const PHASES = {
+      s01: [
+        { name: '現状分析・経営課題整理', tasks: ['経営層ヒアリング', '現状ITシステム棚卸', '課題仮説整理'], dur: {slim:[1,1.5], standard:[1.5,2], large:[2,3]} },
+        { name: 'IT投資方針策定', tasks: ['投資優先度の評価軸設定', 'シナリオ別費用試算', '意思決定支援資料作成'], dur: {slim:[1,2], standard:[1.5,3], large:[2,4]} },
+        { name: 'IT投資計画・意思決定支援', tasks: ['ロードマップ案策定', '経営層説明資料作成', '承認プロセス支援'], dur: {slim:[0.5,1], standard:[1,2], large:[1,2.5]} },
+      ],
+      s02: [
+        { name: 'RFI準備・対象ベンダー選定', tasks: ['要求事項整理', '対象ベンダーリストアップ', 'RFI文書作成'], dur: {slim:[0.5,1], standard:[1,1.5], large:[1,2]} },
+        { name: 'RFI発送・回答収集', tasks: ['RFI発送・問い合わせ対応', 'ベンダー回答収集・整理'], dur: {slim:[0.5,0.5], standard:[0.5,1], large:[0.5,1]} },
+        { name: 'ベンダー情報分析・評価', tasks: ['回答内容比較分析', '評価結果レポート作成', 'デモ・ヒアリング調整'], dur: {slim:[0.5,1], standard:[0.5,1], large:[1,1.5]} },
+      ],
+      s03: [
+        { name: '課題・要件整理', tasks: ['業務要件ヒアリング', 'システム要件整理', 'Must/Should/Want分類'], dur: {slim:[0.5,1], standard:[1,2], large:[1.5,3]} },
+        { name: 'IT構想策定', tasks: ['To-Beアーキテクチャ検討', 'システム全体像の設計', 'ロードマップ案策定'], dur: {slim:[1,2], standard:[1.5,3], large:[2,4]} },
+        { name: 'ソリューション選定支援', tasks: ['パッケージ製品調査', 'ソリューション比較評価', '選定基準策定・評価'], dur: {slim:[0.5,1], standard:[1,2], large:[1.5,3]} },
+        { name: 'RFP作成・ベンダー選定', tasks: ['RFP作成', '提案内容評価', 'ベンダー比較・選定支援'], dur: {slim:[0.5,1], standard:[1,2], large:[1.5,2.5]} },
+        { name: '導入準備支援', tasks: ['I/F要件整理', 'データ移行方針', '導入計画策定支援'], dur: {slim:[0.5,1], standard:[1,1.5], large:[1,2]} },
+      ],
+    };
+
+    const SVC_COLORS = { s01: 'bar-s01', s02: 'bar-s02', s03: 'bar-s03' };
+    const SVC_LABELS = { s01: '01', s02: '02', s03: '03' };
+
+    // 全フェーズを時系列で積み上げ（選択サービスの順に直列配置、各サービスは並列開始可）
+    // 複数サービス選択時は全サービス並列スタート（Month 1から）
+    const allPhases = [];
+    const svcStartMonth = {};
+    checked.forEach(id => { svcStartMonth[id] = 0; }); // 全サービス Month 0 start
+
+    // 同時並行でスタート、各サービス内は順次
+    checked.forEach(svcId => {
+      let cursor = 0;
+      PHASES[svcId].forEach((ph, i) => {
+        const [dmin, dmax] = ph.dur[currentScope];
+        allPhases.push({
+          svcId,
+          name: ph.name,
+          tasks: ph.tasks,
+          start: cursor,
+          dmin,
+          dmax,
+        });
+        cursor += (dmin + dmax) / 2;
+      });
+    });
+
+    // 総月数を計算
+    const totalMonths = Math.ceil(Math.max(...allPhases.map(p => p.start + p.dmax))) + 1;
+    const cols = Math.max(totalMonths, 8);
+
+    // ガントチャート生成（flex方式：バー位置をトラック全体の%で指定）
+    const monthHeaders = Array.from({length: cols}, (_, i) => `<div class="gantt-hdr-cell">${i+1}ヶ月目</div>`).join('');
+
+    const ganttRows = allPhases.map(ph => {
+      const barStart = ph.start;
+      const barEnd   = ph.start + ph.dmax;
+      const solidEnd = ph.start + ph.dmin;
+
+      const pctStart     = (barStart / cols * 100).toFixed(2);
+      const pctSolidW    = ((solidEnd - barStart) / cols * 100).toFixed(2);
+      const pctDashedL   = (solidEnd / cols * 100).toFixed(2);
+      const pctDashedW   = ((barEnd - solidEnd) / cols * 100).toFixed(2);
+      const hasDash      = (barEnd - solidEnd) > 0.05;
+
+      const colorClass  = SVC_COLORS[ph.svcId];
+      const solidRadius = hasDash ? '4px 0 0 4px' : '4px';
+
+      const solidBar = `<div class="gantt-bar-solid ${colorClass}" style="left:${pctStart}%;width:${pctSolidW}%;border-radius:${solidRadius};" title="${ph.name}（最短${ph.dmin}ヶ月）"></div>`;
+      const dashBar  = hasDash
+        ? `<div class="gantt-bar-dashed ${colorClass}-dashed" style="left:${pctDashedL}%;width:${pctDashedW}%;" title="${ph.name}（最長${ph.dmax}ヶ月）"></div>`
+        : '';
+
+      return `<div class="gantt-row">
+        <div class="gantt-label"><span class="phase-svc-tag">${SVC_LABELS[ph.svcId]}</span>${ph.name}</div>
+        <div class="gantt-track">${solidBar}${dashBar}</div>
+      </div>`;
+    }).join('');
+
+    function buildBar() {} // flex方式のため不使用
+
+    // フェーズカード
+    const phaseCards = allPhases.map((ph, i) => `
+      <div class="roadmap-phase-card svc-${ph.svcId}">
+        <div class="rpc-num">P${i+1}</div>
+        <div class="rpc-body">
+          <div class="rpc-title"><span class="phase-svc-tag" style="background:${ph.svcId==='s01'?'#1a5fa8':ph.svcId==='s02'?'#1a7a4a':'#8b3a8b'}">${SVC_LABELS[ph.svcId]}</span>${ph.name}</div>
+          <div class="rpc-period">🕐 想定期間：${ph.dmin}〜${ph.dmax}ヶ月 ／ 開始目安：着手後 ${ph.start === 0 ? '即時' : Math.round(ph.start*10)/10 + 'ヶ月'}</div>
+          <div class="rpc-tasks">${ph.tasks.map(t => '・'+t).join('　')}</div>
+        </div>
+      </div>
+    `).join('');
+
+    const legendItems = checked.map(id => {
+      const colors = {s01:'#1a5fa8', s02:'#1a7a4a', s03:'#8b3a8b'};
+      const names = {s01:'IT投資判断支援', s02:'RFI作成・情報収集支援', s03:'IT構想策定・選定支援'};
+      return `<div class="legend-item"><div class="legend-dot" style="background:${colors[id]}"></div>${names[id]}</div>`;
+    }).join('') + `<div class="legend-item" style="margin-left:auto"><div class="legend-dot" style="background:#1a5fa8;border-radius:2px 0 0 2px;width:16px"></div><span style="font-size:11px">最短</span></div><div class="legend-item"><div class="legend-dashed-line"></div><span style="font-size:11px">延長リスク帯（最長）</span></div>`;
+
+    document.getElementById('roadmap-subtitle').textContent =
+      `${checked.map(id=>({s01:'IT投資判断支援',s02:'RFI作成支援',s03:'IT構想策定・選定支援'}[id])).join(' ＋ ')} ／ ${domainLabel} ／ ${scopeLabel}`;
+
+    document.getElementById('roadmap-content').innerHTML = `
+      <div class="gantt-legend">${legendItems}</div>
+      <div class="gantt-wrap">
+        <div class="gantt-container" style="--cols:${cols}">
+          <div class="gantt-header-row">
+            <div class="gantt-label-hdr"></div>
+            <div class="gantt-track-hdr">${monthHeaders}</div>
+          </div>
+          ${ganttRows}
+        </div>
+      </div>
+      <div class="roadmap-phases">${phaseCards}</div>
+    `;
+
+    const roadmapArea = document.getElementById('roadmap-area');
+    roadmapArea.style.display = 'block';
+    setTimeout(() => roadmapArea.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
   }
 </script>
+
 </body>
 </html>
